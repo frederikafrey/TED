@@ -7,8 +7,10 @@ namespace Praktikum1
     {
         static void Main(string[] args)
         {
-            PointCreator pointCreator = new PointCreator();
-            Console.WriteLine(pointCreator.GetDistance().ToString());
+            Point point1 = new Point(10, 20);
+            Point point2 = new Point(-20, 60);
+            Console.WriteLine(point1.GetDistance(point2));
+
         }
     }
 }
