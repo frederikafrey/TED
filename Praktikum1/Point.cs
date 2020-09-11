@@ -2,7 +2,7 @@
 
 namespace Praktikum1
 {
-    internal class Point
+    public class Point
     {
         private double x;
         private double y;
@@ -52,22 +52,41 @@ namespace Praktikum1
             Point answer = new Point(p.getX() - x, p.getY() - y);
             return answer;
         }
-        //pre: x and y are type double
-        //post: x() += x; y() += y;
+
+        //PRE: IsDouble(newX) AND IsDouble(newY)
+        //POST: getX() += newX; getY() += newY;
         public void Translate(double newX, double newY)
         {
             newX += x;
             newY += y;
         }
-        //pre:
-        //post: x() = factor * x(); y() = factor* y();
+
+        //PRE: 
+        //POST: getX() = factor * getX() AND getY() = factor* getY();
         public void Scale(double factor)
         {
             x = factor * x;
             y = factor * y;
         }
-        //inv: rho does not change
-        //pre: angle is type double and in radians
-        //post: theta() == old theta() + angle;
+
+        //INV: Rho() == old Rho()
+        //PRE: IsDouble(angle) AND angle is in radians
+        //POST: theta() == old theta() + angle;
+        public void CentreRotate(double angle)
+        {
+            double tempX = Rho() * Math.Cos(Theta() + angle);
+            double tempY = Rho() * Math.Sin(Theta() + angle);
+            x = tempX;
+            y = tempY;
+        }
+
+        //PRE: 
+        //POST: p.VectorTo(this).Theta() == p.VectorTo(old.this).Theta() + angle
+        public void Rotate(Point p, double angle)
+        {
+            Translate(-p.x, -p.y);
+            CentreRotate(angle);
+            Translate(p.x, p.y);
+        }
     }
 }
