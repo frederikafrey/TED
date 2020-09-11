@@ -57,8 +57,8 @@ namespace Praktikum1
         //POST: getX() += newX; getY() += newY;
         public void Translate(double newX, double newY)
         {
-            newX += x;
-            newY += y;
+            x += newX;
+            y += newY;
         }
 
         //PRE: 
