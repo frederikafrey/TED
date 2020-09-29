@@ -1,15 +1,17 @@
 using System;
+using System.Collections.Generic;
 using Praktikum1;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace PointTests
+namespace TAD1Tests
 {
     [TestClass]
     public class PointTests
     {
-        Point p1;
-        Point p2;
+        private Point p1;
+        private Point p2;
         Random rnd = new Random();
+        public static List<Point> Route = new List<Point>();
 
         [TestInitialize]
         public void Initialize()
@@ -90,9 +92,12 @@ namespace PointTests
         public void CentreRotateTest()
         {
             Point temp = new Point(15, 0);
+            double oldTheta = temp.Theta();
             temp.CentreRotate(Math.PI / 3);
+            double theta = temp.Theta();
             Assert.AreEqual(temp.getY(), 13, 0.1);
             Assert.AreEqual(temp.getX(), 7.5, 0.1);
+            Assert.AreEqual(theta, oldTheta + Math.PI / 3);
         }
 
         [TestMethod]
@@ -100,10 +105,13 @@ namespace PointTests
         {
             Point temp = new Point(15, 0);
             Point temp1 = new Point(10, 10);
+            double oldTheta = temp.VectorTo(temp1).Theta();
             Assert.AreEqual(temp.Theta(), 0);
             temp.Rotate(temp1, Math.PI / 4);
+            double theta = temp.VectorTo(temp1).Theta();
             Assert.AreEqual(temp.getX(), 20.6, 0.1);
             Assert.AreEqual(temp.getY(), 6.5, 0.1);
+            Assert.AreEqual(theta, oldTheta + Math.PI / 4);
         }
     }
 }

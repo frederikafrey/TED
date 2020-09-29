@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Praktikum1
 {
     public class Point
     {
+        //INV: theta() = Math.Atan2(y, x)
+        //     rho() = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2))
         private double x;
         private double y;
 
@@ -29,6 +32,7 @@ namespace Praktikum1
             return y;
         }
 
+        //POST: result== math.sqrt((self.x()-other.x())**2+(self.y()-other.y())**2)
         public double GetDistance(Point p)
         {
             double distance = Math.Sqrt(Math.Pow(x - p.x, 2) + Math.Pow(y - p.y, 2));
@@ -47,21 +51,20 @@ namespace Praktikum1
             return answer;
         }
 
+        //PRE: result == Point(other.x() - self.x(), other.y() - self.y())
         public Point VectorTo(Point p)
         {
             Point answer = new Point(p.getX() - x, p.getY() - y);
             return answer;
         }
 
-        //PRE: IsDouble(newX) AND IsDouble(newY)
-        //POST: getX() += newX; getY() += newY;
-        public void Translate(double newX, double newY)
+        //POST: getX() += tempX; getY() += tempY;
+        public void Translate(double tempX, double tempY) 
         {
-            x += newX;
-            y += newY;
+            x += tempX;
+            y += tempY;
         }
 
-        //PRE: 
         //POST: getX() = factor * getX() AND getY() = factor* getY();
         public void Scale(double factor)
         {
@@ -69,8 +72,6 @@ namespace Praktikum1
             y = factor * y;
         }
 
-        //INV: Rho() == old Rho()
-        //PRE: IsDouble(angle) AND angle is in radians
         //POST: theta() == old theta() + angle;
         public void CentreRotate(double angle)
         {
@@ -80,7 +81,6 @@ namespace Praktikum1
             y = tempY;
         }
 
-        //PRE: 
         //POST: p.VectorTo(this).Theta() == p.VectorTo(old.this).Theta() + angle
         public void Rotate(Point p, double angle)
         {
@@ -88,5 +88,6 @@ namespace Praktikum1
             CentreRotate(angle);
             Translate(p.x, p.y);
         }
+
     }
 }
